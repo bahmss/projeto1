@@ -79,8 +79,6 @@ class ContactController extends Controller
                 return redirect('/contacts')->with('success', 'Usuário atualizado!');
             }
         }
-
-
     }
 
     /**
@@ -91,7 +89,9 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+		$where = array('id' => $id);
+		$contact = Contact::where($where)->first();
+		return Response::json($contact); 
     }
 
     /**

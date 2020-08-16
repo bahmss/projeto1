@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::resource('contacts', 'ContactController');
 Route::get('contacts/{id}/edit/','ContactController@edit');
+Route::get('contacts/{id}/show/','ContactController@show');

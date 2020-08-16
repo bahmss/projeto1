@@ -45,14 +45,14 @@
         <td>{{$contact->age}}</td>
         <td>{{$contact->whatsapp}}</td>
         <td>
-        <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
-        <a href="javascript:void(0)" class="btn btn-info" id="covid-contact" data-toggle="modal" data-id="{{ $contact->id }}">Formulário de Consulta</a>
-          <a href="javascript:void(0)" class="btn btn-success" id="edit-contact" data-toggle="modal" data-id="{{ $contact->id }}">Editar </a>
-          <meta name="csrf-token" content="{{ csrf_token() }}">
-          @csrf
-          @method('DELETE')
-          <button class="btn btn-danger" type="submit">Deletar</button>
-        </form>
+          <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
+            <a href="javascript:void(0)" class="btn btn-info" id="covid-contact" data-toggle="modal" data-id="{{ $contact->id }}">Formulário de Consulta</a>
+            <a href="javascript:void(0)" class="btn btn-success" id="edit-contact" data-toggle="modal" data-id="{{ $contact->id }}">Editar </a>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger" type="submit">Deletar</button>
+          </form>
         </td>
       </tr>
     @endforeach
@@ -119,6 +119,7 @@
         <h4 class="modal-title" id="contactCrudModal-form"></h4>
       </div>
       <div class="modal-body">
+        <input type="hidden" name="contact_id" id="contact_id" >
         <div class="row">
           <div class="col-xs-2 col-sm-2 col-md-2"></div>
           <div class="col-xs-10 col-sm-10 col-md-10 ">

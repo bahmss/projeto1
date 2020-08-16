@@ -47,8 +47,11 @@ $(document).ready(function () {
 
     /* Formulário de Consulta */
     $('body').on('click', '#covid-contact', function () {
-        $('#contactCrudModal-form').html("Formulário de Consulta");
-        $('#crud-modal-form').modal('show');
+        var contact_id = $(this).data('id');
+        $.get('contacts/'+contact_id+'/show', function (data) {
+            $('#contactCrudModal-form').html("Formulário de Consulta");
+            $('#crud-modal-form').modal('show');
+        })
     });
 
 });
