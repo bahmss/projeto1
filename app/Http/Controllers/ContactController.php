@@ -49,10 +49,10 @@ class ContactController extends Controller
         $contactId = $request->contact_id;
         $cpf = $request->get('cpf');
 
-        if(Contact::where('cpf', $cpf)->exists()){
-            return redirect('/contacts')->with('error', 'Usuário já existe!');
-        } else {
-            if(empty($contactId)) {
+        if(empty($contactId)) {
+            if(Contact::where('cpf', $cpf)->exists()){
+                return redirect('/contacts')->with('error', 'CPF já existe na base!');
+            } else {
                 $contact = new Contact([
                     'cpf' => $request->get('cpf'),
                     'name' => $request->get('name'),
@@ -63,7 +63,11 @@ class ContactController extends Controller
                 $contact->save();
                 return redirect('/contacts')->with('success', 'Usuário gravado com sucesso!');
             }
-            else {
+        }
+        else {
+            if(Contact::where('cpf', $cpf)->where('id', '<>', $contactId)->exists()){
+                return redirect('/contacts')->with('error', 'CPF já existe na base!');
+            } else {
                 $contact = Contact::find($contactId);
                 $contact->cpf =  $request->get('cpf');
                 $contact->name = $request->get('name');
@@ -75,6 +79,8 @@ class ContactController extends Controller
                 return redirect('/contacts')->with('success', 'Usuário atualizado!');
             }
         }
+
+
     }
 
     /**
